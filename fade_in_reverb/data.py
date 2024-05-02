@@ -6,7 +6,7 @@ import soundfile as sf
 import yaml
 import pickle 
 import matplotlib.pyplot as plt 
-config = yaml.safe_load(open(os.path.abspath("config.yaml")))
+config = yaml.safe_load(open(os.path.abspath("../fade_in_reverb/config.yaml")))
 
 
 def load_measurement_dataset() : 

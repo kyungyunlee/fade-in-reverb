@@ -9,7 +9,7 @@ from collections import defaultdict
 from DecayFitNet.python.toolbox.DecayFitNetToolbox import DecayFitNetToolbox
 from DecayFitNet.python.toolbox.core import  decay_kernel, schroeder_to_envelope, PreprocessRIR, decay_model, discard_last_n_percent, FilterByOctaves
 import yaml
-config = yaml.safe_load(open(os.path.abspath("config.yaml")))
+config = yaml.safe_load(open(os.path.abspath("../fade_in_reverb/config.yaml")))
 
 
 print (config)
