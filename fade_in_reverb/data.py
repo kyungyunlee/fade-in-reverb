@@ -6,7 +6,7 @@ import soundfile as sf
 import yaml
 import pickle 
 import matplotlib.pyplot as plt 
-config = yaml.safe_load(open(os.path.abspath("../fade_in_reverb/config.yaml")))
+config = yaml.safe_load(open(os.path.abspath("/Users/kyungyunlee/dev/fade-in-reverb/fade_in_reverb/config.yaml")))
 
 
 def load_measurement_dataset() : 
@@ -15,10 +15,11 @@ def load_measurement_dataset() :
     for pos in range(80)  :
         if pos in [26,27,28] : 
             continue 
-        rir_files = list(Path(os.path.abspath("../data/rirs_med")).glob(f"hallways-lecturehall*{pos:02d}*zoom*.wav"))
+        rir_files = list(Path(os.path.abspath("/Users/kyungyunlee/dev/fade-in-reverb/data/rirs_med")).glob(f"hallways-lecturehall*{pos:02d}*zoom*.wav"))
         curr_pos_rir = np.zeros((96000, 4)) 
         for rir_file in rir_files : 
             y, fs = sf.read(rir_file)
+            print (y.shape)
             curr_pos_rir += y
         for i in range(4) : 
             rirs_tmp.append(curr_pos_rir[:, i]) 
@@ -79,7 +80,7 @@ def load_measurement_dataset() :
 
     # Load position info 
     
-    rir_df = pickle.load(open(os.path.abspath("../data/blind_measurement/all_scenes_with_position_data.pkl"), "rb"))
+    rir_df = pickle.load(open(os.path.abspath("/Users/kyungyunlee/dev/fade-in-reverb/data/blind_measurement/all_scenes_with_position_data.pkl"), "rb"))
     scene_df = rir_df[rir_df['scene'] == 'hallways-lecturehall']
     
     trajectory = list(zip(list(scene_df['posX']),list(scene_df['posY']), list(scene_df['posZ'])))
@@ -94,7 +95,7 @@ def load_measurement_dataset() :
 
 def load_simulation_dataset():
     # MAT 
-    data_dict = mat73.loadmat(os.path.abspath('../data/treble_3room/three_coupled_rooms_4s_fine_normal_calibrated_srirs.mat'))
+    data_dict = mat73.loadmat(os.path.abspath('/Users/kyungyunlee/dev/fade-in-reverb/data/treble_3room/three_coupled_rooms_4s_fine_normal_calibrated_srirs.mat'))
     rirs = data_dict['srirDataset']['srirs']
 
 
@@ -155,7 +156,7 @@ def load_simulation_dataset():
 
 
     # Load position data 
-    pos_data = np.load(os.path.abspath("../data/treble_3room/position_data.npz"))
+    pos_data = np.load(os.path.abspath("/Users/kyungyunlee/dev/fade-in-reverb/data/treble_3room/position_data.npz"))
     rcvPos = pos_data['rcvPos']
     srcPos = pos_data['srcPos']
 
